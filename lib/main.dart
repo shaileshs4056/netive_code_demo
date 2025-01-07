@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:netive_code_demo/router/app_router.dart';
+import 'package:netive_code_demo/ui/home/nativeApiHandler.dart';
 import 'package:netive_code_demo/widget/custom_error_widget.dart';
 import '../values/export.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,6 +15,7 @@ import 'core/locator/locator.dart';
 import 'generated/l10n.dart';
 
 Future<void> main() async {
+  // configure method channel
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +35,7 @@ Future<void> main() async {
       ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
         return CustomErrorWidget(errorDetails: errorDetails);
       };
-
+      NativeApiHandler.instance.configureChannel();
       // Fixing App Orientation.
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -49,6 +51,8 @@ Future<void> main() async {
       }
     },
   );
+
+
 }
 
 class MyApp extends StatelessWidget {
